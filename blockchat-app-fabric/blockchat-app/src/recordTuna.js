@@ -19,14 +19,12 @@ console.log("submit recording of a tuna catch: ");
 
 var array = req.params.tuna.split("-");
 
-//var key = array[0]
-var key = '123';
+var key = array[0];
 var timestamp = array[2];
-//var location = array[1]
-var location = 'loc';
+var location = array[1];
 var vessel = array[200];
-//var holder = array[3]
-var holder = 'rand-holder';
+var holder = array[3];
+//var holder = 'rand-holder';
 
 
 var fabric_client = new Fabric_Client();

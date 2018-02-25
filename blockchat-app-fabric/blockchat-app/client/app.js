@@ -98,9 +98,11 @@ app.factory('appFactory', function($http){
 
 	factory.recordTuna = function(data, callback){
 
+		data.id = getRandomArbitary(1, 1000000);
 		data.timestamp = Date.now();
 		//data.location = data.longitude + ", "+ data.latitude;
 		data.location = "unknown";
+        data.holder = $('#currentUserNickname').html();
 
 		var tuna = data.id + "-" + data.location + "-" + data.timestamp + "-" + data.holder + "-" + data.vessel;
 
