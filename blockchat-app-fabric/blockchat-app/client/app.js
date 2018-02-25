@@ -98,7 +98,7 @@ app.factory('appFactory', function($http){
 			callback(output)
 		});
 
-		factory.queryAllTuna();
+		$scope.queryAllTuna();
 	}
 
 	factory.changeHolder = function(data, callback){
