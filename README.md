@@ -1,2 +1,2 @@
 # blockchat
-blockchat app for the GLH2018hello
+blockchat app for the GLH2018
