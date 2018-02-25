@@ -91,6 +91,7 @@ app.factory('appFactory', function($http){
 		data.timestamp = Date.Now();
 		//data.location = data.longitude + ", "+ data.latitude;
 		data.location = "unknown"
+		data.id = data.id + 1
 
 		var tuna = data.id + "-" + data.location + "-" + data.timestamp + "-" + data.holder + "-" + data.vessel;
 
