@@ -44,7 +44,7 @@
           <div class="col-inside-lg decor-default">
             <div class="chat-body">
               <h6>BlockChat</h6>
-                <div ng-repeat="tuna in all_tuna">
+                <div ng-repeat="tuna in all_tuna | orderBy:'timestamp'">
                     <div class="answer left">
                         <div class="avatar">
                             <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="User name">
@@ -52,12 +52,12 @@
                         </div>
                         <div class="name">{{tuna.holder}}</div>
                         <div class="text">{{tuna.vessel}} </div>
-                        <div class="time">{{tuna.timestamp * 1000 | date:'yyyy-MM-dd HH:mm:ss Z'}}</div>
+                        <div class="time">{{tuna.timestamp * 1000 | date:'MM-dd HH:mm'}}</div>
                     </div>
                 </div>
 
                 <div class="answer-add">
-                <input ng-model="tuna.vessel" placeholder="Write a message">
+                <input id="message-input" ng-model="tuna.vessel" placeholder="Write a message">
                 <span class="answer-btn answer-btn-2" ng-click="recordTuna()"></span>
               </div>
             </div>

@@ -17,7 +17,9 @@ app.controller('appController', function($scope, appFactory){
 	//run on page ready
     $scope.init = function()
     {
-        $scope.queryAllTuna();
+        setInterval(() => {
+            $scope.queryAllTuna();
+		}, 60);
     };
 
 	$scope.queryAllTuna = function(){
@@ -109,6 +111,10 @@ app.factory('appFactory', function($http){
     	$http.get('/add_tuna/'+tuna).success(function(output){
 			callback(output)
 		});
+
+    	setTimeout(function (args) {
+    		$("#message-input").val('');
+		}, 250);
 
 	};
 
