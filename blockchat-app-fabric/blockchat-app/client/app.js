@@ -87,7 +87,7 @@ app.factory('appFactory', function($http){
 	}
 
 	factory.recordTuna = function(data, callback){
-        console.log("VIODEBUG" + data.id);
+
 		data.timestamp = Date.now();
 		//data.location = data.longitude + ", "+ data.latitude;
 		data.location = "unknown"
@@ -97,6 +97,8 @@ app.factory('appFactory', function($http){
     	$http.get('/add_tuna/'+tuna).success(function(output){
 			callback(output)
 		});
+
+		factory.queryAllTuna();
 	}
 
 	factory.changeHolder = function(data, callback){
