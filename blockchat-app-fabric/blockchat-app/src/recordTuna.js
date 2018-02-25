@@ -22,7 +22,7 @@ var array = req.params.tuna.split("-");
 var key = array[0]
 var timestamp = array[2]
 var location = array[1]
-var vessel = array[4]
+var vessel = array[200]
 var holder = array[3]
 
 

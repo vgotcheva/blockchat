@@ -88,7 +88,9 @@ app.factory('appFactory', function($http){
 
 	factory.recordTuna = function(data, callback){
 
-		data.location = data.longitude + ", "+ data.latitude;
+		data.timestamp = Date.Now();
+		//data.location = data.longitude + ", "+ data.latitude;
+		data.location = "unknown"
 
 		var tuna = data.id + "-" + data.location + "-" + data.timestamp + "-" + data.holder + "-" + data.vessel;
 
