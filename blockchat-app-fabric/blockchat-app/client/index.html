@@ -72,6 +72,7 @@
         <label>Message Board</label>
         <p><input id="queryAllTuna" type="submit" value="Refresh" class="btn btn-primary" ng-click="queryAllTuna()"></p>
       </div>
+
       <table id="all_tuna" class="table" align="center">
 
         <tr>
@@ -83,7 +84,7 @@
 
         <tr ng-repeat="tuna in all_tuna">
           <td>{{tuna.Key}}</td>
-          <td>{{tuna.timestamp}}</td>
+          <td>{{tuna.timestamp * 1000 | date:'yyyy-MM-dd HH:mm:ss Z'}}</td>
           <td>{{tuna.holder}}</td>
           <td>{{tuna.vessel}}</td>
         </tr>
