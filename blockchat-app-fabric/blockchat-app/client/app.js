@@ -87,7 +87,7 @@ app.factory('appFactory', function($http){
 	}
 
 	factory.recordTuna = function(data, callback){
-
+        console.log("VIODEBUG" + data.id);
 		data.timestamp = Date.now();
 		//data.location = data.longitude + ", "+ data.latitude;
 		data.location = "unknown"
