@@ -6,7 +6,7 @@
 var express       = require('express');        // call express
 var app           = express();                 // define our app using express
 var bodyParser    = require('body-parser');
-var http          = require('http')
+var http          = require('http');
 var fs            = require('fs');
 var Fabric_Client = require('fabric-client');
 var path          = require('path');
@@ -23,6 +23,13 @@ app.use(bodyParser.json());
 // instantiate the app
 var app = express();
 
+// allow CORS
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
+
 // this line requires and runs the code from our routes.js file and passes it app
 require('./routes.js')(app);
 
@@ -30,7 +37,7 @@ require('./routes.js')(app);
 app.use(express.static(path.join(__dirname, './client')));
 
 // Save our port
-var port = process.env.PORT || 8000;
+var port = process.env.PORT || 8080;
 
 // Start the server and listen on port 
 app.listen(port,function(){

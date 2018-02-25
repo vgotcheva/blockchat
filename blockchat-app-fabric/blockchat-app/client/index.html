@@ -1,140 +1,79 @@
-<!-- SPDX-License-Identifier: Apache-2.0 -->
-
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>BlockChat Application</title>
-    <link rel="icon" href="favicon.png" type="image/gif">
-
-    <!-- require jquery and bootstrap scripts -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <!--  This file has been downloaded from bootdey.com    @bootdey on twitter -->
+    <!--  All snippets are MIT license http://bootdey.com/license -->
+    <!-- 
+    	The codes are free, but we require linking to our web site.
+    	Why to Link?
+    	A true story: one girl didn't set a link and had no decent date for two years, and another guy set a link and got a top ranking in Google! 
+    	Where to Put the Link?
+    	home, about, credits... or in a good page that you want
+    	THANK YOU MY FRIEND!
+    -->
+    <title>facebook messenger chat - Bootdey.com</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
-    
-    <!-- adding style here -->
-    <style type="text/css">
-      header{
-        background-color: lightgray;
-        font-size:20px;
-        padding:15px;
-      }
-      header, .form-group{
-        margin-bottom: 3%;
-      }
-      .form-group{
-        width:50%;
-      }
-      #body{
-        margin-left:3%;
-        margin-right:3%;
-      }
-      .form-control{
-        margin: 8px;
-      }
-      #right_header{
-        width:20%;
-        font-size:15px;
-        margin-right:0px;
-      }
-      #left_header{
-        margin-left:0;
-        width:40%;
-        display:inline-block;
-      } 
-      #id {
-        width:49%;
-        display: inline-block;
-      }
-      table {
-          font-family: arial, sans-serif;
-          border-collapse: collapse;
-          width: 100%;
-      }
-      td, th {
-          border: 1px solid #dddddd;
-          text-align: left;
-          padding: 8px;
-      }
-      tr:nth-child(even) {
-          background-color: #dddddd;
-      }
-    </style>
-  </head>
-  <body ng-app="application" ng-controller="appController">
-    <header>
-      <div id="left_header">Blockchat Application</div>
-      <i id="right_header">Global Legal Hackaton 2018</i>
-    </header>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body ng-app="application" ng-controller="appController" ng-init="init()">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.6.8-fix/jquery.nicescroll.min.js"></script>
 
-    <div id="body">
-      <div class="form-group">
-        <label>Message Board</label>
-        <p><input id="queryAllTuna" type="submit" value="Refresh" class="btn btn-primary" ng-click="queryAllTuna()"></p>
+<div class="content container-fluid bootstrap snippets">
+      <div class="row row-broken">
+        <div class="col-sm-3 col-xs-12">
+          <div class="col-inside-lg decor-default chat" style="overflow: hidden; outline: none;" tabindex="5000">
+            <div class="chat-users">
+              <h6>Online</h6>
+                <div class="user">
+                    <div class="avatar">
+                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="User name">
+                    <div class="status off"></div>
+                    </div>
+                    <div class="name">{{ current_user }} (me)</div>
+                    <div class="mood">100k ICO</div>
+                </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-9 col-xs-12 chat" style="overflow: hidden; outline: none;" tabindex="5001">
+          <div class="col-inside-lg decor-default">
+            <div class="chat-body">
+              <h6>BlockChat</h6>
+                <div ng-repeat="tuna in all_tuna">
+                    <div class="answer left">
+                        <div class="avatar">
+                            <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="User name">
+                            <div class="status offline"></div>
+                        </div>
+                        <div class="name">{{tuna.holder}}</div>
+                        <div class="text">{{tuna.vessel}} </div>
+                        <div class="time">{{tuna.timestamp}}</div>
+                    </div>
+                </div>
+
+                <div class="answer-add">
+                <input ng-model="tuna.vessel" placeholder="Write a message">
+                <span class="answer-btn answer-btn-2" ng-click="recordTuna()"></span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
- 
-      <table id="all_tuna" class="table" align="center">
-
-        <tr>
-          <th>ID</th>
-          <th>Timestamp</th>
-          <th>To</th>
-          <th>Message</th>
-        </tr>
-
-        <tr ng-repeat="tuna in all_tuna">
-          <td>{{tuna.Key}}</td>
-          <td>{{tuna.timestamp}}</td>
-          <td>{{tuna.holder}}</td>
-          <td>{{tuna.vessel}}</td>
-        </tr>
-      </table>
-
-      <div class="form-group">
-        <label>Message Details</label><br>
-        <h5 style="color:red;margin-bottom:2%" id="error_query">Error: Please enter a valid Message Id</h5>
-        
-        Enter a Message ID: <input id="createName" class="form-control" type="text" placeholder="Ex: 3" ng-model="tuna_id">
-        <input id="querySubmit" type="submit" value="Display" class="btn btn-primary" ng-click="queryTuna()">
-      </div>
-
-      <table id="query_tuna" class="table" align="center">
-
-        <tr>
-          <th>Timestamp</th>
-          <th>Recepient</th>
-          <th>Message</th>
-        </tr>
-
-        <tr>
-          <td>{{query_tuna.timestamp}}</td>
-          <td>{{query_tuna.holder}}</td>
-          <td>{{query_tuna.vessel}}</td>
-        </tr>
-      </table>
-
-      <div class="form-group">
-        <label>Compose Message</label>
-        <h5 style="color:green;margin-bottom:2%" id="success_create">Success! Tx ID: {{create_tuna}}</h5>
-        <br>
-        To: <input class="form-control" type="text" placeholder="Ex: Hansel" ng-model="tuna.holder">
-        Message Text: <input class="form-control" type="text" placeholder="Ex: 0239L" ng-model="tuna.vessel">
-        <!--Enter timestamp: <input class="form-control" type="text" placeholder="Ex: 4982342301" ng-model="tuna.timestamp">-->
-        Enter Message id: <input class="form-control" type="text" placeholder="Ex: 11" ng-model="tuna.id">
-        <input id="createSubmit" type="submit" value="Send" class="btn btn-primary" ng-click="recordTuna()" ng-click="queryAllTuna()"> 
-      </div>
-
-      <div class="form-group">
-        <label>Forward Message</label><br>
-        <h5 style="color:green;margin-bottom:2%" id="success_holder">Success! Tx ID: {{change_holder}}</h5>
-        <h5 style="color:red;margin-bottom:2%" id="error_holder">Error: Please enter a valid Tuna Id</h5>
-        Enter a message ID: <input class="form-control" name="assetSelect" placeholder="Ex: 1" ng-model="holder.id">
-        Forward TO: <input class="form-control" name="assetSelect" placeholder="Ex: Barry" ng-model="holder.name">
-        <input id="transferSubmit" type="submit" value="Forward" class="btn btn-primary" ng-click="changeHolder()">
-      </div>
-
     </div>
-  </body>
-    <!-- requiring the angular page -->
-    <script type="text/javascript" src="app.js"> </script>
+
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+    $(".chat").niceScroll();
+})
+</script>
+
+<!-- requiring the angular page -->
+<script type="text/javascript" src="app.js"> </script>
+</body>
 </html>

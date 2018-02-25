@@ -11,7 +11,15 @@ app.controller('appController', function($scope, appFactory){
 	$("#success_create").hide();
 	$("#error_holder").hide();
 	$("#error_query").hide();
-	
+
+	$scope.current_user = "BlockChatUser" + getRandomArbitary(1, 100);
+
+	//run on page ready
+    $scope.init = function()
+    {
+        $scope.queryAllTuna();
+    };
+
 	$scope.queryAllTuna = function(){
 
 		appFactory.queryAllTuna(function(data){
@@ -36,21 +44,23 @@ app.controller('appController', function($scope, appFactory){
 			$scope.query_tuna = data;
 
 			if ($scope.query_tuna == "Could not locate tuna"){
-				console.log()
+				console.log();
 				$("#error_query").show();
 			} else{
 				$("#error_query").hide();
 			}
 		});
-	}
+	};
 
 	$scope.recordTuna = function(){
 
 		appFactory.recordTuna($scope.tuna, function(data){
+			console.log(data);
 			$scope.create_tuna = data;
 			$("#success_create").show();
+            $scope.queryAllTuna();
 		});
-	}
+	};
 
 	$scope.changeHolder = function(){
 
@@ -78,19 +88,19 @@ app.factory('appFactory', function($http){
     	$http.get('/get_all_tuna/').success(function(output){
 			callback(output)
 		});
-	}
+	};
 
 	factory.queryTuna = function(id, callback){
     	$http.get('/get_tuna/'+id).success(function(output){
 			callback(output)
 		});
-	}
+	};
 
 	factory.recordTuna = function(data, callback){
 
 		data.timestamp = Date.now();
 		//data.location = data.longitude + ", "+ data.latitude;
-		data.location = "unknown"
+		data.location = "unknown";
 
 		var tuna = data.id + "-" + data.location + "-" + data.timestamp + "-" + data.holder + "-" + data.vessel;
 
@@ -98,7 +108,7 @@ app.factory('appFactory', function($http){
 			callback(output)
 		});
 
-	}
+	};
 
 	factory.changeHolder = function(data, callback){
 
@@ -107,9 +117,16 @@ app.factory('appFactory', function($http){
     	$http.get('/change_holder/'+holder).success(function(output){
 			callback(output)
 		});
-	}
+	};
 
 	return factory;
 });
+
+
+function getRandomArbitary(min, max)
+{
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
 
 
