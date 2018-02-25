@@ -97,7 +97,7 @@ func (s *SmartContract) queryTuna(APIstub shim.ChaincodeStubInterface, args []st
 Will add test data (10 tuna catches)to our network
 */
 func (s *SmartContract) initLedger(APIstub shim.ChaincodeStubInterface) sc.Response {
-	timestampnow := time.Now()
+	timestampnow := time.Now().String()
 	tuna := []Tuna{
 		Tuna{Vessel: "Welcome to BlockChat", Timestamp: timestampnow, Holder: "bot"},
 		//Tuna{Vessel: "M83T", Location: "91.2395, -49.4594", Timestamp: "1504057825", Holder: "Dave"},
