@@ -70,7 +70,7 @@
     <div id="body">
       <div class="form-group">
         <label>Message Board</label>
-        <p><input id="queryAllTuna" type="submit" value="Query" class="btn btn-primary" ng-click="queryAllTuna()"></p>
+        <p><input id="queryAllTuna" type="submit" value="Refresh" class="btn btn-primary" ng-click="queryAllTuna()"></p>
       </div>
  
       <table id="all_tuna" class="table" align="center">
@@ -95,7 +95,7 @@
         <h5 style="color:red;margin-bottom:2%" id="error_query">Error: Please enter a valid Message Id</h5>
         
         Enter a Message ID: <input id="createName" class="form-control" type="text" placeholder="Ex: 3" ng-model="tuna_id">
-        <input id="querySubmit" type="submit" value="Refresh" class="btn btn-primary" ng-click="queryTuna()">
+        <input id="querySubmit" type="submit" value="Display" class="btn btn-primary" ng-click="queryTuna()">
       </div>
 
       <table id="query_tuna" class="table" align="center">
