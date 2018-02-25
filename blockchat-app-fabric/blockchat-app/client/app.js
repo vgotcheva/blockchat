@@ -3,7 +3,7 @@
 'use strict';
 
 var app = angular.module('application', []);
-var tuna = 1
+let tuna;
 // Angular Controller
 app.controller('appController', function($scope, appFactory){
 
@@ -25,6 +25,7 @@ app.controller('appController', function($scope, appFactory){
 			    return parseFloat(a.Key) - parseFloat(b.Key);
 			});
 			$scope.all_tuna = array;
+			tuna=data.length + 1;
 		});
 	}
 
@@ -46,9 +47,8 @@ app.controller('appController', function($scope, appFactory){
 	}
 
 	$scope.recordTuna = function(){
-		var id = tuna + 1;
-		$scope.tuna_id = id;
-		console.log($scope.tuna_id);
+		var id = tuna++;
+		$scope.tuna.id = id;
 		appFactory.recordTuna($scope.tuna, function(data){
 			$scope.create_tuna = data;
 			$("#success_create").show();
