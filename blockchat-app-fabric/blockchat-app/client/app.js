@@ -88,7 +88,7 @@ app.factory('appFactory', function($http){
 
 	factory.recordTuna = function(data, callback){
 
-		data.timestamp = Date.Now();
+		data.timestamp = Date.now();
 		//data.location = data.longitude + ", "+ data.latitude;
 		data.location = "unknown"
 		data.id = data.id + 1
