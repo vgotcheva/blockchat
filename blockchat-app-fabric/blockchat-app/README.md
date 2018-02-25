@@ -1,9 +1,33 @@
-## Hyperledger Fabric Sample Application
+## How to start blockchat App
 
-This application demonstrates the creation and transfer of tuna fish shipments between actors leveraging Hyperledger Fabric in the supply chain. In this exercise we will set up the minimum number of nodes required to develop chaincode. It has a single peer and a single organization.
 
-if getting error about running ./startFabric.sh permission 
+./basic-network-stop.sh
 
-chmod a+x startFabric.sh
+./basic-network-teardown.sh
 
-This code is based on code written by the Hyperledger Fabric community. Source code can be found here: (https://github.com/hyperledger/fabric-samples). 
+the check if everyting is cleaned with 
+docker ps -a ; docker images
+
+if not 
+docker rm $(docker stop $(docker ps -aq))
+and 
+docker rmi -f $(docker images | grep "dev"- | cut -f 1 -d ' ' -)
+
+then clean all the old keys
+rm -rf ~/.hfc-key-store /tmp/hfc/
+
+./basic-network-stop.sh
+
+./basic-network-teardown.sh
+
+./startFabric.sh
+
+wait to get a prompt
+
+node ./registerAdmin.js
+
+node ./registerUser.js
+
+screen -S server -dm node server
+
+At this point, open the site in an web browser.
